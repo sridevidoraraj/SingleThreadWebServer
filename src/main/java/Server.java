@@ -1,11 +1,25 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class Server {
 
-    static Logger logger = Logger.getLogger(Server.class.getName());
+//    static Logger logger = Logger.getLogger(Server.class.getName());
+private static Logger logger = null;
+
+    static {
+        InputStream stream = Server.class.getClassLoader().
+                getResourceAsStream("logging.properties");
+        try {
+            LogManager.getLogManager().readConfiguration(stream);
+            logger= Logger.getLogger(Server.class.getName());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) throws IOException {
 
         ServerSocket serverSocket = new ServerSocket(8080);
