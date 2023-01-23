@@ -2,19 +2,16 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 public class Server {
-
-//    static Logger logger = Logger.getLogger(Server.class.getName());
-private static Logger logger = null;
+    static colorLogger colorLogger = new colorLogger();
 
     static {
         InputStream stream = Server.class.getClassLoader().
                 getResourceAsStream("logging.properties");
         try {
             LogManager.getLogManager().readConfiguration(stream);
-            logger= Logger.getLogger(Server.class.getName());
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -23,17 +20,18 @@ private static Logger logger = null;
     public static void main(String[] args) throws IOException {
 
         ServerSocket serverSocket = new ServerSocket(8080);
-        logger.info("\u001B[34m"+"server started"+"\u001B[0m");
+
+        colorLogger.logInfo("server started");
         while (true) {
             listenToClientConnections(serverSocket);
         }
 
     }
 
-    private static void listenToClientConnections(ServerSocket serverSocket) throws IOException {
+    private static void listenToClientConnections(ServerSocket serverSocket) {
         try {
             Socket clientSocket = serverSocket.accept();
-            logger.info("\u001B[33m"+"client send request");
+            colorLogger.logInfo("client send request");
 
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
@@ -65,7 +63,7 @@ private static Logger logger = null;
             out.print(inputStream.readAllBytes());
             out.flush();
         } catch (IOException e) {
-            logger.severe("\u001B[31m"+e);
+            colorLogger.logError("Error connecting to client"+e);
             throw new RuntimeException(e);
         }
     }
