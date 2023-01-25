@@ -19,7 +19,7 @@ public class Server {
     }
     public static void main(String[] args) throws IOException {
 
-        ServerSocket serverSocket = new ServerSocket(8080);
+        ServerSocket serverSocket = new ServerSocket(8085);
 
         colorLogger.logInfo("server started");
         while (true) {
@@ -37,36 +37,47 @@ public class Server {
 
             File file = new File("D:\\Projects\\csweb\\index.html");
             FileInputStream inputStream = new FileInputStream(file);
-            String requestedResource = "";
-            String incomingLineFromClient;
-            while ((incomingLineFromClient = in.readLine()) != null) {
-                System.out.println(incomingLineFromClient);
+            try {
+                String requestedResource = "";
+                String incomingLineFromClient;
+                while ((incomingLineFromClient = in.readLine()) != null) {
+                    System.out.println(incomingLineFromClient);
 
-                if (incomingLineFromClient.contains("HTTP/1.1")) {
-                    requestedResource = incomingLineFromClient;
+                    if (incomingLineFromClient.contains("HTTP/1.1")) {
+                        requestedResource = incomingLineFromClient;
+                    }
+
+                    if (incomingLineFromClient.equals(""))
+                        break;
                 }
 
-                if (incomingLineFromClient.equals(""))
-                    break;
+                PrintWriter out = new PrintWriter(clientSocket.getOutputStream());
+                if(file.exists()) {
+
+                    String response = "You have requested this resource: " + requestedResource;
+
+                    out.print("HTTP/1.1 200 OK\n");
+                    out.print("Content-Length: " + response.length() + "\n");
+                    out.print("Content-Type: text/html; charset=utf-8\n");
+                    out.print("Date: Tue, 25 Oct 2016 08:17:59 GMT\n");
+                    out.print("\n");
+                    out.print(response);
+                    out.print(inputStream.readAllBytes());
+                    out.flush();
+                }else{
+                    out.println("404 NOT FOUND\n");
+                }
+            } catch (IOException e) {
+                colorLogger.logError("Error connecting to client" + e);
+                throw new RuntimeException(e);
             }
-
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream());
-
-            String response = "You have requested this resource: " + requestedResource;
-
-            out.print("HTTP/1.1 200 OK\n");
-            out.print("Content-Length: " + response.length() + "\n");
-            out.print("Content-Type: text/html; charset=utf-8\n");
-            out.print("Date: Tue, 25 Oct 2016 08:17:59 GMT\n");
-            out.print("\n");
-            out.print(response);
-            out.print(inputStream.readAllBytes());
-            out.flush();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         } catch (IOException e) {
-            colorLogger.logError("Error connecting to client"+e);
             throw new RuntimeException(e);
         }
     }
+
 }
 
 //            OutputStream os = clientSocket.getOutputStream();
