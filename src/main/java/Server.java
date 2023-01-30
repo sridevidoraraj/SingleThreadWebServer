@@ -1,6 +1,10 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.logging.LogManager;
 
 public class Server {
@@ -22,22 +26,30 @@ public class Server {
         ServerSocket serverSocket = new ServerSocket(8085);
 
         colorLogger.logInfo("server started");
+        Instant start = Instant.now();
+        colorLogger.logInfo("Starting Time : " +start);
         while (true) {
             listenToClientConnections(serverSocket);
+            Instant end = Instant.now();
+            Duration timeElapsed = Duration.between(start, end);
+            colorLogger.logInfo("Time Duration : " +timeElapsed);
         }
 
     }
 
-    private static void listenToClientConnections(ServerSocket serverSocket) {
+    public static void listenToClientConnections(ServerSocket serverSocket) {
         try {
             Socket clientSocket = serverSocket.accept();
             colorLogger.logInfo("client send request");
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+//            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
             File file = new File("D:\\Projects\\csweb\\index.html");
+
             FileInputStream inputStream = new FileInputStream(file);
             try {
+                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 String requestedResource = "";
                 String incomingLineFromClient;
                 while ((incomingLineFromClient = in.readLine()) != null) {
@@ -52,9 +64,8 @@ public class Server {
                 }
 
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream());
-                if(file.exists()) {
-
-                    String response = "You have requested this resource: " + requestedResource;
+                if (file.exists()) {
+                   String response = "You have requested this resource: " + requestedResource;
 
                     out.print("HTTP/1.1 200 OK\n");
                     out.print("Content-Length: " + response.length() + "\n");
@@ -64,8 +75,10 @@ public class Server {
                     out.print(response);
                     out.print(inputStream.readAllBytes());
                     out.flush();
-                }else{
-                    out.println("404 NOT FOUND\n");
+
+                } else {
+
+                    out.print("HTTP/1.1 404 NOT FOUND\n");
                 }
             } catch (IOException e) {
                 colorLogger.logError("Error connecting to client" + e);
