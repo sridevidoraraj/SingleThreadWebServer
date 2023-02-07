@@ -77,7 +77,7 @@ public class HttpServer {
             path = "/index.html";
         }
 
-        return Paths.get("D:/Projects/HTML/sample", path);
+        return Paths.get("src/main/resources", path);
     }
 
     private static String guessContentType(Path filePath) throws IOException {
