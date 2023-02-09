@@ -1,0 +1,24 @@
+##complied class file
+/target/classes/colorLogger.class
+/target/classes/HttpServer.class
+/target/classes/Server.class
+
+##xml file
+/.idea/compiler.xml
+/.idea/dbnavigator.xml
+/.idea/encodings.xml
+/example.iml
+/.idea/externalDependencies.xml
+/.idea/GrepConsole.xml
+/.idea/jarRepositories.xml
+/.idea/misc.xml
+/.idea/vcs.xml
+/.idea/.gitignore
+
+##maven#target/#
+/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+/target/example-1.0-SNAPSHOT.jar
+/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+/target/classes/logging.properties
+/target/maven-archiver/pom.properties
+/target/classes/index.html
