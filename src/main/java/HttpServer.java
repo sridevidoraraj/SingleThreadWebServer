@@ -34,7 +34,7 @@ public class HttpServer {
         }
 
         String accessLog = String.format("Client %s, method %s, path %s, version %s, host %s, headers %s",
-                client.toString(), method, path, version, host, headers.toString());
+                client, method, path, version, host, headers);
         System.out.println(accessLog);
 
 
