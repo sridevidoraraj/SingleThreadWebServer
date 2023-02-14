@@ -1,3 +1,5 @@
+package com.gcit.server;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,7 +35,7 @@ public class HttpServer {
             headers.add(header);
         }
 
-        String accessLog = String.format("Client %s, method %s, path %s, version %s, host %s, headers %s",
+        String accessLog = String.format("Client %s,\n method %s, path %s, version %s, host %s, \n headers %s",
                 client, method, path, version, host, headers);
         System.out.println(accessLog);
 

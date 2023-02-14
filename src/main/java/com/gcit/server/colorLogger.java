@@ -1,3 +1,5 @@
+package com.gcit.server;
+
 import java.util.logging.Logger;
 
 public class colorLogger {
