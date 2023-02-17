@@ -1,16 +1,18 @@
-package com.gcit.server;
+package com.gcit.webserver;
+
+import com.gcit.webserver.subpackage.HttpServer;
+import com.gcit.webserver.subpackage.colorLogger;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Properties;
 import java.util.Scanner;
 import java.util.logging.LogManager;
 
 public class Server {
-    static colorLogger colorLogger = new colorLogger();
+    static com.gcit.webserver.subpackage.colorLogger colorLogger = new colorLogger();
 
     static {
         InputStream stream = Server.class.getClassLoader().

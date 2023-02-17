@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-<!--    <artifactId>example</artifactId>-->
-    <artifactId>server</artifactId>
+    <artifactId>Server</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -15,42 +15,38 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.gcit.server.Server</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-jar-plugin</artifactId>-->
+<!--                <version>3.2.0</version>-->
 <!--                <configuration>-->
-<!--                    <includes>-->
-<!--                        <include>**/*.properties</include> &lt;!&ndash; add any other resource files here &ndash;&gt;-->
-<!--                    </includes>-->
+<!--                    <archive>-->
+<!--                        <manifest>-->
+<!--&lt;!&ndash;                            <addClasspath>true</addClasspath>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <classpathPrefix>lib/</classpathPrefix>&ndash;&gt;-->
+<!--                            <mainClass>com.gcit.webserver.Server</mainClass>-->
+<!--                        </manifest>-->
+<!--                    </archive>-->
 <!--                </configuration>-->
-            </plugin>
-        </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>
-                        logging.properties
-                    </include>
-                    <include>
-                        index.html
-                    </include>
-                </includes>
-            </resource>
-        </resources>
-    </build>
-
-
+<!--&lt;!&ndash;                <configuration>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <includes>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <include>**/*.properties</include> &lt;!&ndash; add any other resource files here &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                    </includes>&ndash;&gt;-->
+<!--&lt;!&ndash;                </configuration>&ndash;&gt;-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--        <resources>-->
+<!--            <resource>-->
+<!--                <directory>src/main/resources</directory>-->
+<!--                <includes>-->
+<!--                    <include>-->
+<!--                        index.html-->
+<!--                    </include>-->
+<!--                    <include>logging.properties</include>-->
+<!--                </includes>-->
+<!--            </resource>-->
+<!--        </resources>-->
+<!--    </build>-->
 </project>

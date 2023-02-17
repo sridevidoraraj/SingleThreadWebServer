@@ -1,4 +1,4 @@
-## Single Threaded Web com.gcit.server.Server Program
+## Single Threaded Web com.gcit.webserver.Server Program
 ### Structure
 This project structured using intellij platform and maven as build system.
 ### About Project
@@ -53,5 +53,5 @@ mvn clean install
 ```
 to run the program, in main application by clicking the run button icon where the java class file is created.
 ```bash
-public class com.gcit.server.Server {
+public class com.gcit.webserver.Server {
 ```

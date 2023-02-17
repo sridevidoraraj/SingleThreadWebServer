@@ -1,4 +1,4 @@
-package com.gcit.server;
+package com.gcit.webserver.subpackage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HttpServer {
-    static void handleClient(Socket client) throws IOException {
+    public static void handleClient(Socket client) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
         StringBuilder requestBuilder = new StringBuilder();

@@ -1,4 +1,4 @@
-package com.gcit.server;
+package com.gcit.webserver.subpackage;
 
 import java.util.logging.Logger;
 
